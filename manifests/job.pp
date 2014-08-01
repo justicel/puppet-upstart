@@ -39,8 +39,9 @@ define upstart::job (
   validate_re($service_ensure, '^(running|true|stopped|false)$',
     'service_ensure must be "running" or "stopped".')
 
-  validate_re($console, '^(log|none|output)$',
-    'console must be "log", "none", or "output".')
+  if $console {
+    validate_re($console, '^(log|none|output)$', 'console must be "log", "none", or "output".')
+  }
 
   validate_re($expect, '^(|fork|daemon|stop)$',
     'expect must be "fork", "daemon", "stop".')
